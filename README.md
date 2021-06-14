@@ -1,6 +1,13 @@
 # pstester
 This is a tester for the 42 School project "Push Swap".
 
+## Installation
+Clone this repo inside the root folder of your project:
+```
+sudo git clone git@github.com:daisvke/pstester.git
+```
+(or anywhere as long as you can set your own values in the config file)
+
 ## Commands
 * Show moves for all tested number sets:
 ```
@@ -11,10 +18,12 @@ This is a tester for the 42 School project "Push Swap".
 ```
 ./pstester -e
 ```
-* Swho help section:
+* Show help section:
 ```
 ./pstester -h
 ```
 
 ## Description
-* A log is generated for each test and is saved in the "log" file
+* You can set your own values in config.sh.
+* A log is generated for each test and is saved n the "log" file.
+* 
