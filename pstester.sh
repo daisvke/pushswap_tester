@@ -4,6 +4,7 @@
 #   ( p )( s )( t )( e )( s )( t )( e )( r )
 #    \_/  \_/  \_/  \_/  \_/  \_/  \_/  \_/ 
 
+export PATH=$PATH:/usr/
 
 # Arrays of tested numbers
 two=("1 2" "2 1")
@@ -51,14 +52,14 @@ twenty=(
 # Change this to checker_Mac if needed
 CHECKER=checker_linux
 
-# Your header location (if not at root)
-# INC=push_swap.h
+# Your header location
+# INC=../push_swap.h
 
 # Look for the libft folder and make it
-if [[ -e libft ]]
+if [[ -e ../libft ]]
 then
-	cd libft; sudo make; cd ..
-	LIB=libft/libft.a
+	cd ../libft; sudo make; cd ../pstester
+	LIB=../libft/libft.a
 fi
 
 # Colors
@@ -74,7 +75,7 @@ rm -f log 2> /dev/null
 
 # Compile (without flags !)
 # All '.c' files have to be in the 'src' folder
-gcc src/*.c $INC $LIB
+gcc ../src/*.c $INC $LIB
 
 while test $# -gt 0; do
 	case "$1" in
@@ -129,7 +130,7 @@ function tester ()
 	do
 		TOTAL=$[$TOTAL + 1]
 		# Feed log file
-		echo -en "[$i]" >> log
+		sudo echo -en "[$i]" >> log
 		printMoves "$i" >> log
 		# Print moves
 		if [[ $ALL ]]
