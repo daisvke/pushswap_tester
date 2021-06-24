@@ -4,163 +4,100 @@
 #   ( p )( s )( t )( e )( s )( t )( e )( r )
 #    \_/  \_/  \_/  \_/  \_/  \_/  \_/  \_/ 
 
-export PATH=$PATH:/usr/
+source config.sh
+source commands.sh
+source short_sets.sh
+source long_sets.sh
 
-# Arrays of tested numbers
-two=("1 2" "2 1")
-
-three=("1 2 3" "1 3 2" "2 1 3" "2 3 1" "3 1 2" "3 2 1")
-
-four=(
-	"1 2 3 4" "1 2 4 3" "1 3 2 4" "1 3 4 2" "1 4 2 3" "1 4 3 2"
-	"2 1 3 4" "2 1 4 3" "2 3 1 4" "2 3 4 1" "2 4 1 3" "2 4 3 1" 
-	"3 1 2 4" "3 1 4 2" "3 2 4 1" "3 2 1 4" "3 4 1 2" "3 4 2 1"
-	"4 1 2 3" "4 1 3 2" "4 2 1 3" "4 2 3 1" "4 3 1 2" "4 3 2 1"
-	)
-
-five=(
-	"1 2 3 4 5" "1 2 3 5 4" "1 2 4 3 5" "1 2 4 5 3" "1 2 5 3 4" "1 2 5 4 3" 
-	"1 3 2 4 5" "1 3 2 5 4" "1 3 4 2 5" "1 3 4 5 2" "1 3 5 2 4" "1 3 5 4 2"
-	"1 4 2 3 5" "1 4 2 5 3" "1 4 3 2 5" "1 4 3 5 2" "1 4 5 2 3" "1 4 5 3 2"
-	"1 5 2 3 4" "1 5 2 4 3" "1 5 3 2 4" "1 5 3 4 2" "1 5 4 2 3" "1 5 4 3 2"
-	"2 1 3 4 5" "2 1 3 5 4" "2 1 4 3 5" "2 1 4 5 3" "2 1 5 3 4" "2 1 5 4 3"
-	"2 3 1 4 5" "2 3 1 5 4" "2 3 4 1 5" "2 3 4 5 1" "2 3 5 1 4" "2 3 5 4 1"
-	"2 4 1 3 5" "2 4 1 5 3" "2 4 3 1 5" "2 4 3 5 1" "2 4 5 1 3" "2 4 5 3 1"
-	"2 5 1 3 4" "2 5 1 4 3" "2 5 3 1 4" "2 5 3 4 1" "2 5 4 1 3" "2 5 4 3 1"
-	"3 1 2 4 5" "3 1 2 5 4" "3 1 4 2 5" "3 1 4 5 2" "3 1 5 2 4" "3 1 5 4 2"
-	"3 2 1 4 5" "3 2 4 5 1" "3 2 5 4 1"
-	"3 4 5 1 2" "3 4 5 2 1" "3 5 2 1 4" "3 5 4 2 1"
-	"4 1 2 3 5" "4 1 2 5 3" "4 1 3 2 5" "4 1 3 5 2" "4 1 5 2 3" "4 1 5 3 2"
-	"4 2 1 3 5" "4 2 1 5 3" "4 2 3 5 1" "4 2 5 3 1"
-	"4 3 1 2 5" "4 3 2 1 5" "4 3 5 1 2" "4 3 5 2 1"
-	"4 5 1 3 2" "4 5 2 3 1" "4 5 3 2 1"
-	"5 1 2 3 4" "5 1 2 4 3" "5 1 3 2 4" "5 1 3 4 2" "5 1 4 2 3" "5 1 4 3 2"
-	"5 2 1 3 4" "5 2 1 4 3" "5 2 3 1 4" "5 2 3 4 1" "5 2 4 1 3" "5 2 4 3 1"
-	"5 3 1 2 4" "5 3 1 4 2" "5 3 2 1 4" "5 3 2 4 1" "5 3 4 1 2" "5 3 4 2 1"
-	)
-
-six=(
-	"1 2 3 4 6 5" "1 2 3 5 6 4" "1 2 4 5 6 3"
-	"2 1 3 4 5 6" "2 1 3 5 4 6" "2 1 3 6 5 8"
-	"3 2 1 4 5 6" "3 2 1 5 4 6" "3 2 4 5 6 1"
-	)
-
-twenty=(
-	"1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 17 16 18 20 19"
-)
-
-# Change this to checker_Mac if needed
-CHECKER=checker_linux
-
-# Your header location
-# INC=../push_swap.h
-
-# Look for the libft folder and make it
-if [[ -e ../libft ]]
-then
-	cd ../libft; sudo make; cd ../pstester
-	LIB=../libft/libft.a
-fi
-
-# Colors
-CYAN="\033[36m"
-GREEN="\033[32m"
-RED="\033[31m"
-NC="\033[0m"
-
+#
+# CLEAN
+#
 # Remove previous executable file
 rm -f a.out 2> /dev/null
 # Remove previous log file
 rm -f log 2> /dev/null
 
-# Compile (without flags !)
-# All '.c' files have to be in the 'src' folder
-gcc ../src/*.c $INC $LIB
-
-while test $# -gt 0; do
-	case "$1" in
-		-h|--help)
-			echo "options:"
-			echo -ne "-h, --help\t\tshow brief help\n"
-			echo -ne "-a,\t\t\tshow all moves\n"
-			echo -ne "-e,\t\t\tshow moves for errors\n"
-			echo -ne "-o,\t\t\tshow output from executable (no checker)"
-			exit 0
-      		;;
-    	-a)
-    		export ALL=true
-	  		shift
-	  		;;
-		-e)
-			export ERR=true
-			shift
-			;;
-		-o)
-			export OUT=true
-			shift
-			;;
-		*)
-			echo "Invalid option: $1"
-      		exit 1
-		    break
-		    ;;
-	esac
-done
+#
+# COMPILE
+#
+$cc $src $inc $lib
 
 # Display moves
 function printMoves ()
 {
 	echo -ne "\n"
-	timeout .02 ./a.out $1 2> /dev/null
+	timeout $timeout ./a.out $1 2> /dev/null	
+	export moves=$(timeout $timeout ./a.out $1 2> /dev/null | wc -l)
 	echo -ne "\n"
 }
 
+#
+# FUNCTIONS
+#
 # Variables to get the total score
-SCORE=0
-TOTAL=0
+score=0 # Total OKs
+average=0;
+total=0 # Total tests
+unsorted=0 # Total unsorted lists 
+hm=0 # Total higher moves
+count=0 # Number of tested combinations for a set 
 
 # Main testing function
 function tester ()
 {
 	# Print label 
-	echo -e "${CYAN}$1${NC}"
+	echo -e "${cyan}$1${nc}"
+	# Allowed max moves
+	limit=$2
 	shift
-	# Testing loop
+	shift
+	average=0
+	count=0
+	# testing loop
 	for i in "$@"
 	do
-		TOTAL=$[$TOTAL + 1]
+		total=$[$total + 1]
 		# Feed log file
-		sudo echo -en "[$i]" >> log
+		echo -en "[$i]" >> log
 		printMoves "$i" >> log
+		# Variable that displays number of moves
+		if [[ $move_count ]]
+		then
+			display_move_count=" (${moves}mv)"
+		fi
 		# Print moves
-		if [[ $ALL ]]
+		if [[ $all ]]
 		then
-			printMoves "$i"
+			printmoves "$i"
 		fi
-		RES=$(timeout .02 ./a.out $i 2> /dev/null | ./$CHECKER $i)
-		if [[ $RES == "OK" ]]
+		res=$(timeout $timeout ./a.out $i 2> /dev/null | ./$checker $i)
+		if [[ $res == "OK" ]] && [[ $moves -le $limit ]]
 		then # Print 'OK'
-			((SCORE++))
-			echo -en "${GREEN}[$i]${NC} "
-		elif [[ $RES == "KO" ]] # Print 'KO'
+			((score++))
+			echo -en "${green}[$i${display_move_count}]${nc} "
+		elif [[ $res == "KO" ]] # print 'ko'
 		then
-			if [[ $ERR ]]
+			((unsorted++))
+			if [[ $err ]]
 			then
-				echo -en "\n${RED}[$i]${NC} "
-				printMoves "$i"
+				echo -en "\n${red}[$i${display_move_count}]${nc} "
+				printmoves "$i"
 			else
-				echo -en "${RED}[$i]${NC} "
+				echo -en "${red}[$i${display_move_count}]${nc} "
 			fi
+		elif [[ $res == "OK" ]] && [[ $moves -gt $limit ]]
+		then
+			((hm++))
+			echo -en "${red}[HM:$i${display_move_count}]${nc} "
 		else
-			if [[ $OUT ]]
-			then
-				echo -en "[$i]"
-				printMoves "$i"
-			else
-				echo -en "${RED}[${RES}]${NC} "
-			fi
+			echo -en "${red}[${res}]${nc} "
 		fi
+		average=$[$average + $moves]
+		count=$[$count + 1]
 	done
+	average=$[$average / $count]
+	echo -e "\n"
+	echo -e "Average: $average"
 	echo -e "\n"
 }
 
@@ -171,24 +108,39 @@ function tester ()
 echo -en "\n"
 echo -e "START...\n"
 
-# Two digits
-tester "=== 2 DIGITS ===" "${two[@]}"
+# Non continuous numbers
+tester "=== NON CONTINUOUS ===" "12" "${nonContinuous[@]}"
+# Two elements
+tester "=== 2  ===" "1" "${two[@]}"
+# Three elements
+tester "=== 3 ELEMENTS ===" "2" "${three[@]}"
+# Four elements
+tester "=== 4 ELEMENTS ===" "12" "${four[@]}"
+# Five elements
+tester "=== 5 ELEMENTS ===" "12" "${five[@]}"
+# Six elements
+tester "=== 6 ELEMENTS ===" "13" "${six[@]}"
+# Seven elements
+tester "=== 7 ELEMENTS ===" "17" "${seven[@]}"
+# Twenty elements
+tester "=== 20 ELEMENTS ===" "90" "${twenty[@]}"
+# Hundred elements
+tester "=== 100 ELEMENTS ===" "1100" "${hundred[@]}"
+# Five hundred elements
+ulimit -s 65000000 # Increase max command arguments
+tester "=== 500 ELEMENTS ===" "5500" "${five_hundred[@]}"
 
-# Three digits
-tester "=== 3 DIGITS ===" "${three[@]}"
-
-# Four digits
-tester "=== 4 DIGITS ===" "${four[@]}"
-
-# Five digits
-tester "=== 5 DIGITS ===" "${five[@]}"
-
-# Six digits
-tester "=== 6 DIGITS ===" "${six[@]}"
-
-# Twenty digits
-tester "=== 20 DIGITS ===" "${twenty[@]}"
+#
+# Print results
+#
 
 echo -en "...END\n\n"
-echo -en "Your score: $SCORE/$TOTAL"
+echo -en "Your score:\t\t$score/$total\n"
+echo -en "Unsorted lists:\t\t$unsorted\n"
+echo -en "Higher moves:\t\t$hm"
 echo -en "\n\n"
+
+#
+# Clean
+#
+rm -f ../*.gch 2> /dev/null
