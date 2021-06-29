@@ -9,6 +9,10 @@ sudo git clone git@github.com:daisvke/pstester.git
 (or anywhere as long as you can set your own values in the config file)
 
 ## Commands
+* Show number of moves for each test:
+```
+./pstester -m
+```
 * Show moves for all tested number sets:
 ```
 ./pstester -a
