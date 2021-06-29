@@ -33,3 +33,21 @@ sudo git clone git@github.com:daisvke/pstester.git
 * You can set your own values in config.sh.
 * A log is generated for each test and is saved n the "log" file.
 * No +500 elements combinations are tested.
+* [OK] (or numbers in green) = The numbers are sorted.<br />
+  [KO] (or numbers in red) = The numbers are not sorted.<br />
+  [HM] = Higher moves = The numbers are sorted but with too much moves.
+  
+
+## To go further
+* Complete the test by generating random numbers with python:
+```
+python3
+import random
+random.sample(range(100), 100)
+```
+This command creates a list of 100 numbers between 0 and 99 with each number used only once.<br />
+The numbers are separated by ', '.<br />
+To replace it by a single space character, do:
+```
+sed 's/, / /g' <<< "SET_OF_NUMBERS"
+```
