@@ -22,6 +22,7 @@ sudo git clone git@github.com:daisvke/pstester.git
 <p align=center>
   <img src="/screenshots/pstester-m.png" width="50%" />
 </p>
+
 * Show moves for all tested number sets:
 ```
 ./pstester -a
