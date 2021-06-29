@@ -33,3 +33,12 @@ sudo git clone git@github.com:daisvke/pstester.git
 * You can set your own values in config.sh.
 * A log is generated for each test and is saved n the "log" file.
 * No +500 elements combinations are tested.
+
+## To go further
+* Complete the test by generating random numbers with python:
+```
+python3
+import random
+random.sample(range(100), 100)
+```
+This command creates a list of 100 numbers between 0 and 99 with each number used only once.
