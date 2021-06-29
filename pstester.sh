@@ -127,7 +127,6 @@ tester "=== 20 ELEMENTS ===" "90" "${twenty[@]}"
 # Hundred elements
 tester "=== 100 ELEMENTS ===" "1100" "${hundred[@]}"
 # Five hundred elements
-ulimit -s 65000000 # Increase max command arguments
 tester "=== 500 ELEMENTS ===" "5500" "${five_hundred[@]}"
 
 #
@@ -144,3 +143,4 @@ echo -en "\n\n"
 # Clean
 #
 rm -f ../*.gch 2> /dev/null
+rm -f a.out 2> /dev/null
