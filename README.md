@@ -3,6 +3,10 @@ This is a tester for the 42 School project "Push Swap".
 It is useful during the first steps of writing the code, but not for the final tests,<br />
 as it does not test enough combinations.
 
+<p align=center>
+  <img src="/screenshots/pstester.png" width="50%" />
+</p>
+
 ## Installation
 Clone this repo inside the root folder of your project:
 ```
@@ -15,6 +19,10 @@ sudo git clone git@github.com:daisvke/pstester.git
 ```
 ./pstester -m
 ```
+<p align=center>
+  <img src="/screenshots/pstester-m.png" width="50%" />
+</p>
+
 * Show moves for all tested number sets:
 ```
 ./pstester -a
