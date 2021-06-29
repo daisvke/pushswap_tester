@@ -97,7 +97,7 @@ function tester ()
 	done
 	average=$[$average / $count]
 	echo -e "\n"
-	echo -e "Average: $average"
+	echo -e "Average: $average moves"
 	echo -e "\n"
 }
 

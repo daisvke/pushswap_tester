@@ -9,6 +9,7 @@ do
 		-h|--help)
 			echo "options:"
 			echo -ne "-h, --help\t\tshow brief help\n"
+			echo -ne "-m,\t\t\tshow number of moves\n"
 			echo -ne "-a,\t\t\tshow all moves\n"
 			echo -ne "-e,\t\t\tshow outputs for errors\n"
 			exit 0
