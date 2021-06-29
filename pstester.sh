@@ -46,7 +46,8 @@ count=0 # Number of tested combinations for a set
 function tester ()
 {
 	# Print label 
-	echo -e "${cyan}$1${nc}"
+	label=$1
+	echo -e "${cyan}${label}${nc}"
 	# Allowed max moves
 	limit=$2
 	shift
@@ -68,27 +69,45 @@ function tester ()
 		# Print moves
 		if [[ $all ]]
 		then
-			printmoves "$i"
+			printMoves "$i"
 		fi
 		res=$(timeout $timeout ./a.out $i 2> /dev/null | ./$checker $i)
 		if [[ $res == "OK" ]] && [[ $moves -le $limit ]]
 		then # Print 'OK'
 			((score++))
-			echo -en "${green}[$i${display_move_count}]${nc} "
+			if [[ ${label} == "=== 100 ELEMENTS ===" ]]
+			then
+				no=$[$count + 1]
+				echo -en "${green}.$no [OK${display_move_count}]${nc} "
+			else	
+				echo -en "${green}[$i${display_move_count}]${nc} "
+			fi
 		elif [[ $res == "KO" ]] # print 'ko'
 		then
 			((unsorted++))
 			if [[ $err ]]
 			then
-				echo -en "\n${red}[$i${display_move_count}]${nc} "
-				printmoves "$i"
+				if [[ ${label} == "=== 100 ELEMENTS ===" ]]
+				then
+					no=$[$count + 1]
+					echo -en "${red}.$no [${display_move_count}]${nc} "
+				else	
+					echo -en "\n${red}[$i${display_move_count}]${nc} "
+				fi
+				printMoves "$i"
 			else
 				echo -en "${red}[$i${display_move_count}]${nc} "
 			fi
 		elif [[ $res == "OK" ]] && [[ $moves -gt $limit ]]
 		then
 			((hm++))
-			echo -en "${red}[HM:$i${display_move_count}]${nc} "
+			if [[ ${label} == "=== 100 ELEMENTS ===" ]]
+			then
+				no=$[$count + 1]
+				echo -en "${red}.$no [HM${display_move_count}]${nc} "
+			else	
+				echo -en "${red}[HM:$i${display_move_count}]${nc} "
+			fi
 		else
 			echo -en "${red}[${res}]${nc} "
 		fi
@@ -126,8 +145,6 @@ tester "=== 7 ELEMENTS ===" "17" "${seven[@]}"
 tester "=== 20 ELEMENTS ===" "90" "${twenty[@]}"
 # Hundred elements
 tester "=== 100 ELEMENTS ===" "1100" "${hundred[@]}"
-# Five hundred elements
-tester "=== 500 ELEMENTS ===" "5500" "${five_hundred[@]}"
 
 #
 # Print results
