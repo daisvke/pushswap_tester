@@ -41,4 +41,9 @@ python3
 import random
 random.sample(range(100), 100)
 ```
-This command creates a list of 100 numbers between 0 and 99 with each number used only once.
+This command creates a list of 100 numbers between 0 and 99 with each number used only once.<br />
+The numbers are separated by ', '.<br />
+To replace it by a single space character, do:
+```
+sed 's/, / /g' <<< "SET_OF_NUMBERS"
+```
