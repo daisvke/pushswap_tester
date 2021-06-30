@@ -1,6 +1,6 @@
 # pstester
 This is a tester for the 42 School project "Push Swap".
-It is useful during the first steps of writing the code, but not for the final tests,<br />
+It is useful during the first steps of writing the code, but not for the final tests,
 as it does not test enough combinations.
 
 <p align=center>
