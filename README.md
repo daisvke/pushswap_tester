@@ -39,7 +39,7 @@ sudo git clone git@github.com:daisvke/pstester.git
 
 ## Description
 * You can set your own values in config.sh.
-* A log is generated for each test and is saved n the "log" file.
+* A log is generated for each test and is saved in the "log" file.
 * +500 elements combinations are not tested.
 * [OK] (or numbers in green) = The numbers are sorted.<br />
   [KO] (or numbers in red) = The numbers are not sorted.<br />
